@@ -1,0 +1,16 @@
+name: Download Tor Browser
+on:
+  workflow_dispatch:
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Tor Browser
+        run: curl -L -o torbrowser.exe https://dist.torproject.org/torbrowser/14.0/tor-browser-windows-x86_64-portable-14.0.exe
+      - name: Upload Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: torbrowser
+          files: torbrowser.exe
+        env:
+          GITHUB_TOKEN: ${{ $GITHUB_TOKEN }}
